@@ -1,20 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
 int main(int argc, char *argv[]) {
-	
-	
-	// palabra guardada x
-	// usuario sabe de cuantas letras x
-	// solicitar una letra mayucula x
-	// comparar la letra ingresada con las letras guardadas.
-	// mostrearle que letras si le atino
-	// restandole vida si falla x
-	// si adivina todas gano x
-	// si se le terminan las vidas le decimos que perdio x
-	// 
  	
 	char palabra[4];
 	
@@ -23,55 +10,86 @@ int main(int argc, char *argv[]) {
 	palabra[2] = 'T';
 	palabra[3] = 'O';
 	
+	char palabraCopia[4];
+	
+	palabraCopia[0] = '_';
+	palabraCopia[1] = '_';
+	palabraCopia[2] = '_';
+	palabraCopia[3] = '_';
+
 	char caracterIngresado;
 	
 	int contadorVidas = 3;
-	
-	int banderaGano = -8;
-	int banderaPerdio = -9;
+
+	const int LETRA_ENCONTRADA = 0;
+	const int LETRA_NO_ENCONTRADA = 1;
+	const int ARROBA = '@';
+	const int JUEGO_GANADO = 0;
+	const int TODAS_LAS_VIDAS_PERDIDAS = 0;
 	
 	int bandera;
 	
+	printf("\nLa palabra guardada en memoria tiene cuatro letras.");
+	printf("\n\n\n ---- Tendras 3 vidas, si fallas alguna letra se te iran restando. ---");
+	int banderaJuegoGanado = -1;
+
+	while(banderaJuegoGanado != JUEGO_GANADO && contadorVidas != TODAS_LAS_VIDAS_PERDIDAS){
+		printf("\n");
+		int contador;
+	    for(contador=0; contador<4; contador++){
+	    	char letra = palabraCopia[contador];
+	    	printf("%c ", letra);
+	    }
 	
-	while(contadorVidas != 0){
-		 printf("\nrestando vidas %i", contadorVidas--);
-	}
+		int banderaLetraEncontrada = LETRA_NO_ENCONTRADA;
+		printf("\n\nIngresa una letra(solo mayusculas).");
+		scanf(" %c", &caracterIngresado);
+		system("cls");
+		
+		for(contador=0; contador<4; contador++){
+			char letra = palabra[contador]; 
+			if(caracterIngresado==letra){
+				banderaLetraEncontrada = LETRA_ENCONTRADA;
+				palabra[contador] = ARROBA;
+				palabraCopia[contador] = letra;
+				break;
+			}
+		}
+		
+		if(banderaLetraEncontrada == LETRA_ENCONTRADA){
+			printf("\nAcertaste la letra %c.", caracterIngresado);	
+		}else if(banderaLetraEncontrada == LETRA_NO_ENCONTRADA){
+		    printf("\nLa letra ingresada %c no pertenece a la palabra.\n", caracterIngresado);
+		    contadorVidas--;
+		    printf("\nPerdiste una vida, te restan %i", contadorVidas);
+		}
+ 		int contadorLetrasEncontradas = 0;
+		for(contador=0; contador<4; contador++){
+			char letra = palabra[contador]; 
+			if(ARROBA==letra){
+				contadorLetrasEncontradas++;
+			}
+		}
+		
+		
+		if(contadorLetrasEncontradas == 4){
+			banderaJuegoGanado = JUEGO_GANADO;
+			 printf("\n ============= Felicidades ganaste =============");
+			 printf("\n La palabra era: ");
+			 	for(contador=0; contador<4; contador++){
+					char letra = palabraCopia[contador];
+					printf("%c", letra); 
+					
+			}
+		}
+		
 	
 
+	}
 	
 	if(contadorVidas == 0){
-		bandera = banderaPerdio;
-	}else{
-		bandera = banderaGano;
-	}
-	
-	if(bandera == banderaGano){
-		printf("\nFelicidades ganaste");
-	}else if(bandera == banderaPerdio){
 		printf("\nPerdiste todas tus vidas y perdiste el juego\n");
 	}
-	
-	
-	
-	printf("La palabra guardada en memoria tiene cuatro letras.");
-	printf("\nTendras 3 vidas, si fallas alguna letra se te iran restando.");
-	printf("\nIngresa una letra(solo mayusculas).");
-	/*
-	scanf("%c", &caracterIngresado);
-	printf("%c hola", caracterIngresado);
-	
-	for(contadorVidas=3; contadorVidas=0; contadorVidas--){
-		printf("\nIngresa una letra(solo mayusculas).");
-		scanf("%c", &caracterIngresado);
-		printf("%c", caracterIngresado);
-		if(caracterIngresado==palabra[0] || caracterIngresado==palabra[1]){
-			printf("Acertaste!!!");
-		}else{
-			printf("Error...");
-		}
-	}*/
-
-	
 	
 	return 0;
 }
