@@ -45,13 +45,13 @@ int main(int argc, char *argv[]) {
 	/*Esta constante le dice al programa que el usurio no encontro una letra del arreglo*/
 	const int LETRA_NO_ENCONTRADA = 1;
 	
-	/*Esta constante cambia el vaos de los indices del arreglo cunado el usurio encuentra una letra*/
+	/*Esta constante cambia el valor de los indices del arreglo cunado el usurio encuentra una letra*/
 	const int ARROBA = '@';
 	
 	/*Esta contante le dice al programa que el usuario ha encontrado todas las letras y por consecuencia ha ganado*/
 	const int JUEGO_GANADO = 0;
 	
-	/*Esta constante le dice al programa que ek usurio no ha encontrado ninguna letra y por ende ha perdido*/
+	/*Esta constante le dice al programa que el usuario no ha encontrado ninguna letra y por ende ha perdido*/
 	const int TODAS_LAS_VIDAS_PERDIDAS = 0;
 	
 	int bandera;
